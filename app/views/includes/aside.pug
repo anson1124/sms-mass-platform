@@ -1,0 +1,39 @@
+//
+  **********************************************************************************************************************************************************
+  MAIN SIDEBAR MENU
+  ***********************************************************************************************************************************************************
+// sidebar start
+aside
+  #sidebar.nav-collapse
+    // sidebar menu start
+    ul#nav-accordion.sidebar-menu
+      p.centered
+        a(href='/profile')
+          img.img-circle(src='/assets/img/ui-zac.jpg', width='60')
+      if user
+        h5.centered #{user.name}
+      else
+        h5.centered 无用户
+      each val in memu
+          if val.fa == "dashboard"
+            li.mt
+              a(href=val.url, class=baseurl==val.url ? 'active' : '')
+                i(class='fa fa-' + val.fa)          
+                span #{val.name}
+          else
+            if val.sub
+              li.sub-menu
+                a(class=isSub ? 'active' : '', href=val.url)
+                  i(class='fa fa-' + val.fa)
+                  span #{val.name}
+                ul.sub
+                  each value in val.sub
+                    li(class=baseurl==value.url ? 'active' : '')
+                      a(href=value.url) #{value.name}
+            else
+              li.sub-menu
+                a(href=val.url, class=baseurl==val.url ? 'active' : '')
+                  i(class='fa fa-' + val.fa)
+                  span #{val.name}
+    // sidebar menu end
+// sidebar end

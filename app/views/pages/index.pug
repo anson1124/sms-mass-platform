@@ -1,0 +1,56 @@
+extends ../layout
+
+block content
+  .row
+    .col-lg-12.main-chart
+      .row.mtbox
+        .col-md-2.col-sm-2.col-md-offset-1.box0
+          .box1
+            span.li_phone
+            h3 #{Mass_info}
+          p 你最近群发了#{Mass_info}条短信. Whoohoo!
+        .col-md-2.col-sm-2.box0
+          .box1
+            span.li_user
+            h3 #{Recent_login}
+          p 在这最近的7日内,你登录了#{Recent_login}次.
+        .col-md-2.col-sm-2.box0
+          .box1
+            span.li_note
+            h3 +#{Data_add}
+          p 你又为自己的群发名单中添加了#{Data_add}条数据.
+        .col-md-2.col-sm-2.box0
+          .box1
+            span.li_stack
+            h3 +#{Msg_Noread}
+          p 有超过#{Msg_Noread}条信息你未阅读.
+        .col-md-2.col-sm-2.box0
+          .box1
+            span.li_data
+            h3 OK!
+          p Your server is working perfectly. Relax &amp; enjoy.
+      // /row mt
+      .row.mt
+        // SERVER STATUS PANELS
+        .col-md-4.col-sm-4.mb
+          .white-panel.pn.donut-chart
+            .white-header
+              h5 服务剩余
+            .row
+              .col-sm-6.col-xs-6.goleft
+                p
+                  i.fa.fa-database
+                  |  70%
+            canvas#serverstatus01(height='120', width='120')
+            script.
+              var doughnutData = [
+              {
+              value: 70,
+              color:"#68dff0"
+              },
+              {
+              value : 30,
+              color : "#fdfdfd"
+              }
+              ];
+              var myDoughnut = new Chart(document.getElementById("serverstatus01").getContext("2d")).Doughnut(doughnutData);

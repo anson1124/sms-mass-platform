@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  h3
+    i.fa.fa-angle-right
+    |  群发名单
+    .row
+      .col-md-12.mt
+        if msgtemplate
+          .alert.alert-warning.alert-dismissable
+            button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
+            strong 会议#{msgtemplate.meeting},时间#{msgtemplate.starttime},地点#{msgtemplate.place}
+        .content-panel
+          table.table.table-hover
+            h4
+              i.fa.fa-angle-right
+              |  已有名单
+              button.btn.btn-success#began(type='button', data-uid=user._id, data-smsid='SMS_56640089', data-msgid=msgtemplate._id) 开始群发
+            hr
+            thead
+              tr
+                th #
+                th 姓名
+                th 手机号
+            tbody
+              each item, idx in members
+                tr
+                  td #{idx}
+                  td #{item.name}
+                  td #{item.tel}
+      // /col-md-12
+  

@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+  .row.mt
+      .col-lg-12
+        .content-panel
+          h4
+            i.fa.fa-angle-right
+            |  群发记录
+          section#no-more-tables
+            table.table.table-bordered.table-striped.table-condensed.cf
+              thead.cf
+                tr
+                  th _id
+                  th detail
+                  th.numeric groupid 
+                  th.numeric request_id
+                  th.numeric result
+                  th.numeric updateAt
+                  th.numeric createAt
+              tbody
+                each item, idx in messages  
+                  tr
+                    td(data-title='_id') #{item._id}
+                    td(data-title='detail') #{item.detail}
+                    td.numeric(data-title='groupid') #{item.groupid}
+                    td.numeric(data-title='request_id') #{item.request_id}
+                    td.numeric(data-title='result') #{item.result}
+                    td.numeric(data-title='updateAt') #{item.meta.updateAt}
+                    td.numeric(data-title='createAt') #{item.meta.createAt}

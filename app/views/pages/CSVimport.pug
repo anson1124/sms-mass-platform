@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+  
+    form.form-inline(method="post", action="/csvUpload", enctype="multipart/form-data")
+      .form-group
+        h3
+          i.fa.fa-angle-right
+          |  群发名单的导入(请使用CSV格式导入)
+      .form-group
+        input#uploadCSV(type="file", name="uploadCSV", accept=".csv")
+      .form-group
+        button.btn.btn-success(type='submit') CSV导入
+    .row
+      .col-md-12.mt
+        .content-panel
+          table.table.table-hover
+            h4
+              i.fa.fa-angle-right
+              |  已有名单
+            hr
+            thead
+              tr
+                th #
+                th 姓名
+                th 手机号
+                th 操作
+            tbody
+              each item, idx in members
+                tr
+                  td #{idx}
+                  td #{item.name}
+                  td #{item.tel}
+                  td 
+                    button.btn.btn-danger.btn-xs
+                      i.fa.fa-trash-o
+                      | Delete
+      // /col-md-12

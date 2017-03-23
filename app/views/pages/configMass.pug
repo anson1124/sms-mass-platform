@@ -1,0 +1,92 @@
+extends ../layout
+
+block content
+  h3
+    i.fa.fa-angle-right
+    |  配置群发
+  // BASIC FORM ELELEMNTS
+  .row.mt
+    .col-lg-12
+      if message
+        .alert.alert-warning.alert-dismissable
+          button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
+          strong #{message}
+      .form-panel
+        h4.mb
+          i.fa.fa-angle-right
+          |  短信模板                   
+        form.form-horizontal.style-form(method='POST', action="/postmsg")
+          .form-group
+            label.col-lg-2.col-sm-2.control-label 模板预览
+            .col-lg-10
+              p.form-control-static 【柠檬工作室】
+                span.text-danger Name
+                |,您好,
+                span.text-danger#Meeting Meeting
+                |将于
+                span.text-danger#Starttime Starttime
+                |在
+                span.text-danger#Place Place
+                |召开,请准时参加
+          .form-group
+            label.col-sm-2.col-sm-2.control-label 姓名Name
+            .col-sm-10
+              input#disabledInput.form-control(type='text', placeholder='这里不要求您填入', disabled='')
+          .form-group
+            label.col-sm-2.col-sm-2.control-label 会议名字Meeting
+            .col-sm-10
+              input.form-control#m(type='text', name='msgtemp[meeting]', value=msgtemp.meeting)
+          .form-group
+            label.col-sm-2.col-sm-2.control-label 举行或开始时间Starttime
+            .col-sm-10
+              input.form-control#s(type='text', name='msgtemp[starttime]', value=msgtemp.starttime)
+              span.help-block 请在填入时再三确认信息的准确性
+          .form-group
+            label.col-sm-2.col-sm-2.control-label 地点Place
+            .col-sm-10
+              input.form-control.round-form#p(type='text', name='msgtemp[place]', value=msgtemp.place)
+          .form-group
+            input(type='hidden' name='msgtemp[user]', value=user._id)
+            if msgtemp._id
+              input(type='hidden' name='msgtemp[_id]', value=msgtemp._id)
+            input(type='hidden' name='msgtemp[smstemplate]', value='SMS_56640089')
+          .form-group
+            button.btn.btn-info.btn-lg.col-sm-6.col-sm-offset-3.col-xs-6.col-xs-offset-3(type='submit') 提交
+  .row
+    .col-md-12.mt
+      .content-panel
+        table.table.table-hover
+          h4
+            i.fa.fa-angle-right
+            |  自己的模板
+          hr
+          thead
+            tr
+              th #
+              th 会议名字
+              th 开始时间
+              th 地点
+              th Status
+              th 操作
+          tbody
+            each item, idx in msgtemplates
+              tr(class='item-msgid-' + item._id)
+                td #{idx}
+                td #{item.meeting}
+                td #{item.starttime}
+                td #{item.place}
+                td
+                  if msgtemplate
+                    if msgtemplate._id==item._id
+                      span.label.label-info.label-mini Selected
+                td 
+                  button.btn.btn-primary.btn-xs(onclick='window.location.href="/configMassUpdate/'+item._id+'"')
+                    i.fa.fa-pencil
+                    | Edit
+                  button.btn.btn-danger.btn-xs.del(data-msgid=item._id)
+                    i.fa.fa-trash-o
+                    | Delete
+                  button.btn.btn-info.btn-xs.default(data-msgid=item._id)
+                    i.fa.fa-file-o
+                    | Default
+    // /col-md-12

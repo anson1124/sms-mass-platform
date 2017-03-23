@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  h3
+    i.fa.fa-angle-right
+    |  个人主页
+  // BASIC FORM ELELEMNTS
+  .row.mt
+    .col-lg-12
+      .form-panel
+        h4.mb
+          i.fa.fa-angle-right
+          |  申请KEY
+        form.form-horizontal.style-form(method='get')
+          .form-group
+            label.col-lg-2.col-sm-2.control-label 温馨提示
+            .col-lg-10
+              p.form-control-static 【柠檬工作室】
+                span.text-danger 你的密钥KEY是由我们提供的
+                |,因此,
+                span.text-danger 当每次用完一次群发之后便会失效
+                |,如果你需要下次继续使用的话,
+                span.text-danger#Meeting 请提前向我们申请
+          .form-group
+            label.col-sm-2.col-sm-2.control-label 原密钥KEY
+            .col-sm-10
+              input#disabledInput.form-control(type='text', placeholder='这里不要求您填入', disabled='')
+          .form-group
+            button.btn.btn-info.btn-lg.col-sm-6.col-sm-offset-3(type='button') 申请

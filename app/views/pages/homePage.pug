@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+  h3
+    i.fa.fa-angle-right
+    |  个人主页
+  // BASIC FORM ELELEMNTS
+  .row.mt
+    .col-lg-12
+      if message
+        .alert.alert-warning.alert-dismissable
+          button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
+          strong #{message}
+      .form-panel
+        h4.mb
+          i.fa.fa-angle-right
+          |  修改密码                   
+        form.form-horizontal.style-form(method='POST', action='/user/motifyPwd')
+          .form-group
+            label.col-lg-2.col-sm-2.control-label 温馨提示
+            .col-lg-10
+              p.form-control-static 【柠檬工作室】
+                span.text-danger 你的密码是有我们提供的
+                |,所以,
+                span.text-danger#Meeting 你尽量不要随意修改密码
+          .form-group
+            label.col-sm-2.col-sm-2.control-label 原密码
+            .col-sm-10
+              input.form-control#m(type='text', name='opassword')
+          .form-group
+            label.col-sm-2.col-sm-2.control-label 新密码
+            .col-sm-10
+              input.form-control#s(type='text', name='npassword')
+          .form-group
+            label.col-sm-2.col-sm-2.control-label 再次输入密码
+            .col-sm-10
+              input.form-control.round-form#p(type='text')
+              span.help-block 再次输入密码,;两次密码一定要相同
+          .form-group
+            button.btn.btn-info.btn-lg.col-sm-6.col-sm-offset-3(type='submit') 提交
