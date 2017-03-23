@@ -1,0 +1,2 @@
+# smsMassPlatform
+这是一个基于nodejs依靠express框架搭建的短信群发平台
