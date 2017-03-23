@@ -8,13 +8,6 @@ exports.homePage = function(req, res){
   });
 }
 
-exports.applyKey = function(req, res){
-  res.render('applyKey', {
-    isSub: true,
-    baseurl: req.url,
-  });
-}
-
 exports.showSignin = function(req, res){
   res.render('signin', {
     title: '管理员登录'
@@ -139,6 +132,15 @@ exports.logout = function(req, res){
 exports.signinRequired = function(req, res, next){
   var user = req.session.user;
   if(!user){
+    return res.redirect('/signin');
+  }
+  next();
+}
+// middleware for user
+exports.adminRequired = function(req, res, next){
+  var user = req.session.user;
+  console.log(user);
+  if(user.role <= 10){
     return res.redirect('/signin');
   }
   next();

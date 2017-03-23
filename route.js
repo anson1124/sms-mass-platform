@@ -3,6 +3,8 @@ var User = require('./app/controllers/user');
 var Msgtemplate = require('./app/controllers/msgtemplate');
 var Member = require('./app/controllers/member');
 var Message = require('./app/controllers/message');
+var Thekey = require('./app/controllers/thekey');
+var ThekeyOfModel = require('./app/models/thekey');
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
 
@@ -12,6 +14,14 @@ module.exports = function(app){
   app.use(function(req, res, next){
     app.locals.user = req.session.user;
     app.locals.msgtemplate = req.session.msgtemplate;
+    if (app.locals.user) {
+      ThekeyOfModel.findOne({user: req.session.user._id}, function(err, thekey){
+        if (err) {console.log(err);}
+        req.session.thekey = thekey;
+      });
+      
+    }
+    app.locals.thekey = req.session.thekey;
     app.locals.message = req.session.message;
     if (req.method === 'GET') {
       req.session.message = '';
@@ -29,7 +39,7 @@ module.exports = function(app){
   //homePage
   app.get('/homePage', User.signinRequired, User.homePage);
   //applyKey
-  app.get('/applyKey', User.signinRequired, User.applyKey);
+  app.get('/applyKey', User.signinRequired, Thekey.applyKey);
 
   //CSVimport
   app.get('/CSVimport', User.signinRequired, Member.CSVimport);
@@ -74,6 +84,14 @@ module.exports = function(app){
   app.get('/configMassUpdate/:id', User.signinRequired, Msgtemplate.configMassUpdate);
   //delete 
   app.delete('/configMass/del', User.signinRequired, Msgtemplate.del);
+  //apply key
+  app.post('/genUuid', User.signinRequired, Thekey.genUuid);
+
+  //key list
+  app.get('/keyList', User.signinRequired, User.adminRequired, Thekey.keyList);
+  //setCancel
+  app.post('/setCancel', User.signinRequired, User.adminRequired, Thekey.setCancel);
+  app.post('/setAccept', User.signinRequired, User.adminRequired, Thekey.setAccept);
   // //signup
   // app.post('/user/signup', User.signup)
   // // important

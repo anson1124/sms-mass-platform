@@ -1,0 +1,43 @@
+extends ../layout
+
+block content
+  .row
+    .col-md-12.mt
+      .content-panel
+        table.table.table-hover
+          h4
+            i.fa.fa-angle-right
+            |  Keys
+          hr
+          thead
+            tr
+              th #
+              th NewKey
+              th Name
+              th Status
+              th 操作
+          tbody
+            each item, idx in thekeys
+              tr
+                td #{idx}
+                td #{item.newkey}
+                td #{item.user.name}
+                td 
+                  case item.issue
+                    when 0
+                      span.label.label-warning 申请中
+                    when 1
+                      span.label.label-info 可使用
+                    when 2
+                      span.label.label-danger 失效
+                    default
+                      span.label.label-danger 失效
+                td 
+                  if item.issue==0
+                    button.btn.btn-info.btn-xs.accept(data-kid=item._id)
+                      i.fa.fa-file-o
+                      | Accept
+                  button.btn.btn-danger.btn-xs.cancel(data-kid=item._id)
+                    i.fa.fa-trash-o
+                    | Cancel
+        // /col-md-12

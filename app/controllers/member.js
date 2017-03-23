@@ -11,7 +11,7 @@ var Msgtemplate = require('../models/msgtemplate');
 var Message = require('../models/message');
 //exports importCSV
 exports.importCSV = function(req, res){
-  Member.remove({}, function(err){
+  Member.remove({user: req.session.user._id}, function(err){
     console.log('---clean db ---------------------------------------');
     if (err) {
       console.log('Member remove all occur a error:', err);
@@ -118,7 +118,11 @@ exports.beganMass = function(req, res){
               }
           })
         })
-        return res.json({success:1});
+        var id = req.session.thekey._id;
+        Thekey.update({_id:id}, {$inc:{issue:1}}, function(err){
+          if (err) {console.log(err);}
+          return res.json({success:1});
+        })
       })
     })
   })
@@ -130,6 +134,10 @@ exports.beganMassing = function(req, res){
   if (req.session.msgtemplate==null) {
     req.session.message = '请先配置群发消息';
     return res.redirect('/configMass');
+  }
+  if (req.session.thekey==null) {
+    req.session.message = '请先申请资格';
+    return res.redirect('/applyKey');
   }
   Member.find({user: userid}, function(err, members){
     if (err) {

@@ -22,6 +22,9 @@ var config = {
         },{
           name: '申请key',
           url: '/applyKey',
+        },{
+          name: 'keyList',
+          url: '/keyList',
         }
         ],
       }, //homePage

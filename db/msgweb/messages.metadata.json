@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"msgweb.messages"},{"v":2,"unique":true,"key":{"groupid":1},"name":"groupid_1","ns":"msgweb.messages","background":true}]}

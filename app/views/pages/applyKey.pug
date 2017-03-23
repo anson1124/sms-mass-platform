@@ -8,6 +8,10 @@ block content
   .row.mt
     .col-lg-12
       .form-panel
+        if message
+        .alert.alert-warning.alert-dismissable
+          button.close(type='button', data-dismiss='alert', aria-hidden='true') &times;
+          strong #{message}
         h4.mb
           i.fa.fa-angle-right
           |  申请KEY
@@ -24,6 +28,21 @@ block content
           .form-group
             label.col-sm-2.col-sm-2.control-label 原密钥KEY
             .col-sm-10
-              input#disabledInput.form-control(type='text', placeholder='这里不要求您填入', disabled='')
+              input#disabledInput.form-control(type='text', placeholder=thekey.newkey, disabled='')
           .form-group
-            button.btn.btn-info.btn-lg.col-sm-6.col-sm-offset-3(type='button') 申请
+            label.col-sm-2.col-sm-2.control-label 状态
+            .col-sm-10
+              case thekey.issue
+                when 0
+                  span.label.label-warning 申请中
+                when 1
+                  span.label.label-info 可使用
+                when 2
+                  span.label.label-danger 失效
+                default
+                  span.label.label-danger 失效
+          .form-group
+            if thekey.issue<=1
+              button.btn.btn-info.btn-lg.col-sm-6.col-sm-offset-3.apply(type='button', data-uid=user._id, disabled='disabled') 申请
+            else
+              button.btn.btn-info.btn-lg.col-sm-6.col-sm-offset-3.apply(type='button', data-uid=user._id) 申请

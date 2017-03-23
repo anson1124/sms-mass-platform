@@ -21,6 +21,7 @@
     "mongoose": "^4.9.1",
     "morgan": "^1.8.1",
     "node-csv": "^0.1.2",
+    "node-uuid": "^1.4.8",
     "pug": "^2.0.0-beta11",
     "serve-favicon": "^2.4.1",
     "trim": "0.0.1",
