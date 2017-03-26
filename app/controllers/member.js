@@ -9,6 +9,7 @@ var Member = require('../models/member');
 var Smstemplate = require('../models/smstemplate');
 var Msgtemplate = require('../models/msgtemplate');
 var Message = require('../models/message');
+var Thekey = require('../models/thekey');
 //exports importCSV
 exports.importCSV = function(req, res){
   Member.remove({user: req.session.user._id}, function(err){
