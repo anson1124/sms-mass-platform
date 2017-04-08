@@ -31,7 +31,9 @@
 
 [![项目主页](https://raw.github.com/Lanseria/smsMassPlatform/master/docs/images/index.png)](http://msgweb.limonplayer.cn/)
 
-[![项目部分截图](https://raw.github.com/Lanseria/smsMassPlatform/master/docs/images/index.png)](http://msgweb.limonplayer.cn/)
+[![项目部分截图](https://raw.github.com/Lanseria/smsMassPlatform/master/docs/images/detail1.png)](http://msgweb.limonplayer.cn/)
+
+[![项目部分截图](https://raw.github.com/Lanseria/smsMassPlatform/master/docs/images/detail2.png)](http://msgweb.limonplayer.cn/)
 
 
 
@@ -73,7 +75,7 @@
 │       ├── includes
 │       ├── pages
 │       └── layout.pug
-
+│ 
 ├── db                供参考的数据库数据
 │   └── learnsite
 ├── node_modules      node模块目录
